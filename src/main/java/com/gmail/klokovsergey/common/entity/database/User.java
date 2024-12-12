@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.*;
 import java.util.Date;
+import java.util.Objects;
 
 
 @Getter
@@ -35,5 +36,12 @@ public class User implements Externalizable {
     @Override
     public String toString() {
         return userTgId + ":" + currentMode + "," + lastVisit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userTgId == user.userTgId;
     }
 }
