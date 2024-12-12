@@ -3,6 +3,7 @@ package com.gmail.klokovsergey.common;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gmail.klokovsergey.common.entity.StatusMode;
 import com.gmail.klokovsergey.common.entity.database.CashUsersHub;
+import com.gmail.klokovsergey.common.entity.database.DataArchive;
 import com.gmail.klokovsergey.common.entity.view.Viewer;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -45,7 +46,7 @@ public class ToDoHubBot extends MultisessionTelegramBot{
             switch (userMessage) {
                 case "/start" -> cashUsersHub.setUserStatusMode(getCurrentChatId(), StatusMode.START);
                 case "/exit" -> {
-
+                    DataArchive.getInstance().stopArchive();
                     System.exit(0);
                 }
             }

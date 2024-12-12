@@ -3,6 +3,7 @@ package com.gmail.klokovsergey.common.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.gmail.klokovsergey.common.entity.database.User;
+import com.gmail.klokovsergey.common.entity.tasks.Task;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,5 +38,15 @@ public class DataArchiveService {
             }
         }
         return users;
+    }
+
+    public static void saveTasksToFile(File file, List<Task> tasks) {
+        try {
+            objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+            objectMapper.writeValue(file, tasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Не удалось записать файл " + file.getName());
+        }
     }
 }

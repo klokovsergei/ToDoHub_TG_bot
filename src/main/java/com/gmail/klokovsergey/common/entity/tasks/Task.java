@@ -18,7 +18,6 @@ import java.util.Objects;
 public class Task implements Externalizable {
 
     //region Поля
-    private long userTgId;
     private LocalDate dateCreate;
     private LocalDate dateFinish;
     private LocalDate dateNotification;
@@ -31,7 +30,6 @@ public class Task implements Externalizable {
     //region Override методы записи и чтения
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
-        out.writeLong(userTgId);
         out.writeObject(dateCreate);
         out.writeObject(dateFinish);
         out.writeObject(dateNotification);
@@ -42,7 +40,6 @@ public class Task implements Externalizable {
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        userTgId = in.readLong();
         dateCreate = (LocalDate) in.readObject();
         dateFinish = (LocalDate) in.readObject();
         dateNotification = (LocalDate) in.readObject();
@@ -54,8 +51,7 @@ public class Task implements Externalizable {
     @Override
     public String toString() {
         return "Task{" +
-                "userTgId=" + userTgId +
-                ", dateCreate=" + dateCreate +
+                "dateCreate=" + dateCreate +
                 ", dateFinish=" + dateFinish +
                 ", dataNotification=" + dateNotification +
                 ", timeNotification=" + timeNotification +
@@ -68,7 +64,7 @@ public class Task implements Externalizable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return userTgId == task.userTgId && status == task.status && Objects.equals(dateCreate, task.dateCreate)
+        return status == task.status && Objects.equals(dateCreate, task.dateCreate)
                 && Objects.equals(dateFinish, task.dateFinish) && Objects.equals(dateNotification, task.dateNotification)
                 && Objects.equals(timeNotification, task.timeNotification) && Objects.equals(title, task.title);
     }

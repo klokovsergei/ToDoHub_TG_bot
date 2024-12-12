@@ -62,5 +62,15 @@ public class UserTest {
         System.out.println("Новый пользователь из файла: " + newUser);
         System.out.println("================");
         System.out.println("Сверяем обоих User: check = " + (user1.equals(newUser)));
+
+        System.out.println("================");
+        System.out.println("Проверяем работу EQUELS. User равны, если равны ID");
+        user1.setLastVisit(new Date());
+        user1.setCurrentMode(StatusMode.ADMIN);
+        System.out.println("Изменил LastVisit и CurrentMode: status = " + (user1.equals(newUser)));
+        user1.setLastVisit(userDate);
+        user1.setCurrentMode(userMode);
+        user1.setUserTgId(5L);
+        System.out.println("LastVisit и CurrentMode одинаковые, ID разные. Объекты НЕ РАВНЫ: status = " + (!user1.equals(newUser)));
     }
 }

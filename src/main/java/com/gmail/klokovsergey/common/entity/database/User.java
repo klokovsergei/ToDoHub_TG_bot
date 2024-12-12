@@ -44,4 +44,9 @@ public class User implements Externalizable {
         User user = (User) o;
         return userTgId == user.userTgId;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userTgId);
+    }
 }

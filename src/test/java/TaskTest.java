@@ -19,12 +19,6 @@ public class TaskTest {
         System.out.println("Task создан = " + (task1 != null));
         System.out.println("================");
 
-        System.out.println("userTgId (long)");
-        long userTgId = 1L;
-        task1.setUserTgId(userTgId);
-        System.out.println("ID = " + task1.getUserTgId() + ", check = " + (userTgId == task1.getUserTgId()));
-        System.out.println("================");
-
         System.out.println("dateCreate (LocalDate)");
         LocalDate dateCreate = LocalDate.now();
         task1.setDateCreate(dateCreate);
