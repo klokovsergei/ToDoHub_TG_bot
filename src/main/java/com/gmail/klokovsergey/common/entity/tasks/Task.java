@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -18,18 +19,12 @@ public class Task implements Externalizable {
 
     //region Поля
     private long userTgId;
-    private LocalDate dateStart;
+    private LocalDate dateCreate;
     private LocalDate dateFinish;
-    private LocalDateTime dataTimeNotification;
+    private LocalDate dateNotification;
+    private LocalTime timeNotification;
     private String title;
-    private String description;
     private boolean status;
-
-    //endregion
-
-    //region Методы
-
-
 
     //endregion
 
@@ -37,28 +32,45 @@ public class Task implements Externalizable {
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeLong(userTgId);
-        out.writeObject(dateStart);
+        out.writeObject(dateCreate);
         out.writeObject(dateFinish);
-        out.writeObject(dataTimeNotification);
+        out.writeObject(dateNotification);
+        out.writeObject(timeNotification);
         out.writeObject(title);
-        out.writeObject(description);
         out.writeBoolean(status);
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         userTgId = in.readLong();
-        dateStart = (LocalDate) in.readObject();
+        dateCreate = (LocalDate) in.readObject();
         dateFinish = (LocalDate) in.readObject();
-        dataTimeNotification = (LocalDateTime) in.readObject();
+        dateNotification = (LocalDate) in.readObject();
+        timeNotification = (LocalTime) in.readObject();
         title = (String) in.readObject();
-        description = (String) in.readObject();
         status = in.readBoolean();
     }
 
-    //endregion
+    @Override
+    public String toString() {
+        return "Task{" +
+                "userTgId=" + userTgId +
+                ", dateCreate=" + dateCreate +
+                ", dateFinish=" + dateFinish +
+                ", dataNotification=" + dateNotification +
+                ", timeNotification=" + timeNotification +
+                ", title='" + title + '\'' +
+                ", status=" + status +
+                '}';
+    }
 
-    //region Конструкторы
-
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return userTgId == task.userTgId && status == task.status && Objects.equals(dateCreate, task.dateCreate)
+                && Objects.equals(dateFinish, task.dateFinish) && Objects.equals(dateNotification, task.dateNotification)
+                && Objects.equals(timeNotification, task.timeNotification) && Objects.equals(title, task.title);
+    }
     //endregion
 }

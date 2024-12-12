@@ -5,6 +5,7 @@ target/
 
 ### Private and Log
 src/main/resources/notForInternet
+src/test/java/log/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
